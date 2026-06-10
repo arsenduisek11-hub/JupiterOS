@@ -1,6 +1,6 @@
 #include "../lib/libk.h"
 
-#define VGA_ADDRESS 0xC00B8000
+#define VGA_ADDRESS 0xB8000
 #define VGA_WIDTH 80
 #define VGA_HEIGHT 25
 
@@ -43,7 +43,7 @@ void putchar(char c) {
     }
 }
 
-void kernel_main() {
+void kernel_main(uint32_t magic, uint32_t mbi) {
     clear_screen();
     
     const char *msg = "JupiterOS v2.0 - 64-bit Kernel";
@@ -56,6 +56,7 @@ void kernel_main() {
     printf("Memory: 64 MB allocated\n");
     printf("CPU: x86-64\n");
     printf("Architecture: Multiboot\n");
+    printf("Magic: %x\n", magic);
     
     while (1) {
         asm("hlt");
